@@ -1,0 +1,25 @@
+{
+	"name": "Rely & zzq",
+	"short_name": "Rely & zzq",
+	"start_url": "index.html",
+	"display": "standalone",
+	"background_color": "#2196f3",
+	"description": "Rely & zzq 博客",
+	"theme_color": "blue",
+	"icons": [
+		{  "src": "/512.png", "type": "image/png", "sizes": "512x512"  },
+        {  "src": "/256.png", "type": "image/png", "sizes": "256x256"  },
+        {  "src": "/192.png", "type": "image/png", "sizes": "192x192"  },
+        {  "src": "/144.png", "type": "image/png", "sizes": "144x144"  },
+        {  "src": "/128.png", "type": "image/png", "sizes": "128x128"  }
+	],
+	"related_applications": [
+	  {
+		"platform": "web"
+	  },
+	  {
+		"platform": "play",
+		"url": "http://www.wxzzq.com"
+	  }
+	]
+  }
