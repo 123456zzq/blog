@@ -10,8 +10,8 @@ module.exports = {
 	markdown: {
 		lineNumbers: false // 代码块显示行号
 	},
-	// sidebar: 'auto', // 自动生成侧边栏
-	sidebarDepth: 0, // 侧边栏深度 默认为1 最大为2
+	sidebar: 'auto', // 自动生成侧边栏
+	sidebarDepth: 100, // 侧边栏深度 默认为1 最大为2
 	search: true, // 关闭搜索
 	smoothScroll: true, // 开启页面滚动
 	themeConfig: {
@@ -20,13 +20,14 @@ module.exports = {
 			// { text: '美食打卡', link: '/food/food/' },
 			{ text: '每日一题', link: '/question/' },
 			{ text: 'Js', link: '/js/' },
+			{ text: 'Vue', link: '/vue/' },
 		],
 		sidebar: {
 			"/question/": [
 				{
-					title: " ",
+					title: "",
 					collapsable: false,
-					children:["/question/"]
+					children: ["/question/"]
 				},
 				{
 					title: "Array",
@@ -67,6 +68,25 @@ module.exports = {
 					]
 				}
 			],
+			"/vue/": [
+				{
+					title: '手写Vue核心原理',
+					collapsable: false,
+					path:"/vue/"
+					// children: [
+					// 	{
+					// 		title: "Rollup",
+					// 		path: "/vue/rollup"
+					// 	},
+					// 	{
+					// 		title: "Vue响应式原理",
+					// 		path: "/vue/vmodel"
+					// 	},
+						
+					// ]
+
+				}
+			]
 		}
 	}
 }

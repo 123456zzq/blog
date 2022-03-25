@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>实现数组原型方法 | 大Q前端进阶</title>
+    <meta name="generator" content="VuePress 1.5.3">
+    <link rel="icon" href="/app.ico">
+    <meta name="description" content="成长之旅">
+    <link rel="preload" href="/assets/css/0.styles.550733f2.css" as="style"><link rel="preload" href="/assets/js/app.58d27036.js" as="script"><link rel="preload" href="/assets/js/2.99575ca8.js" as="script"><link rel="preload" href="/assets/js/17.97b95325.js" as="script"><link rel="prefetch" href="/assets/js/10.aa19c72d.js"><link rel="prefetch" href="/assets/js/11.09fe5e71.js"><link rel="prefetch" href="/assets/js/12.1050c9a3.js"><link rel="prefetch" href="/assets/js/13.77aaf57d.js"><link rel="prefetch" href="/assets/js/14.bcf39797.js"><link rel="prefetch" href="/assets/js/15.1969ae57.js"><link rel="prefetch" href="/assets/js/16.362cf136.js"><link rel="prefetch" href="/assets/js/18.b8d41aeb.js"><link rel="prefetch" href="/assets/js/19.dedad791.js"><link rel="prefetch" href="/assets/js/20.7c79639a.js"><link rel="prefetch" href="/assets/js/21.04d8a40d.js"><link rel="prefetch" href="/assets/js/22.a33d2d87.js"><link rel="prefetch" href="/assets/js/23.27fe6aea.js"><link rel="prefetch" href="/assets/js/3.298308c1.js"><link rel="prefetch" href="/assets/js/4.5c6ad674.js"><link rel="prefetch" href="/assets/js/5.d9720409.js"><link rel="prefetch" href="/assets/js/6.23631876.js"><link rel="prefetch" href="/assets/js/7.9edc3237.js"><link rel="prefetch" href="/assets/js/8.b6d73c19.js"><link rel="prefetch" href="/assets/js/9.2b63de7f.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.550733f2.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">大Q前端进阶</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/question/" class="nav-link router-link-active">
+  每日一题
+</a></div><div class="nav-item"><a href="/js/" class="nav-link">
+  Js
+</a></div><div class="nav-item"><a href="/vue/" class="nav-link">
+  Vue
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/question/" class="nav-link router-link-active">
+  每日一题
+</a></div><div class="nav-item"><a href="/js/" class="nav-link">
+  Js
+</a></div><div class="nav-item"><a href="/vue/" class="nav-link">
+  Vue
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span></span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/question/" aria-current="page" class="sidebar-link">目录</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Array</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/question/array/1.html" class="sidebar-link">数组去重</a></li><li><a href="/question/array/2.html" class="sidebar-link">数组扁平化</a></li><li><a href="/question/array/3.html" aria-current="page" class="active sidebar-link">数组原型方法</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="实现数组原型方法"><a href="#实现数组原型方法" class="header-anchor">#</a> 实现数组原型方法</h3> <h3 id="foreach"><a href="#foreach" class="header-anchor">#</a> forEach</h3> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token class-name">Array</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">forEach2</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">callback<span class="token punctuation">,</span> thisArg</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">TypeError</span><span class="token punctuation">(</span><span class="token string">'this is null or not defined'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> callback <span class="token operator">!==</span> <span class="token string">&quot;function&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">TypeError</span><span class="token punctuation">(</span>callback <span class="token operator">+</span> <span class="token string">' is not a function'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">const</span> <span class="token constant">O</span> <span class="token operator">=</span> <span class="token function">Object</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>  <span class="token comment">// this 就是当前的数组</span>
+    <span class="token keyword">const</span> len <span class="token operator">=</span> <span class="token constant">O</span><span class="token punctuation">.</span>length <span class="token operator">&gt;&gt;&gt;</span> <span class="token number">0</span>  <span class="token comment">// 后面有解释</span>
+    <span class="token keyword">let</span> k <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>k <span class="token operator">&lt;</span> len<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>k <span class="token keyword">in</span> <span class="token constant">O</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">callback</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>thisArg<span class="token punctuation">,</span> <span class="token constant">O</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">,</span> k<span class="token punctuation">,</span> <span class="token constant">O</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        k<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><ul><li>O.length &gt;&gt;&gt; 0 是什么操作？就是无符号右移 0 位，那有什么意义嘛？就是为了保证转换后的值为正整数。其实底层做了 2 层转换，第一是非 number 转成 number 类型，第二是将 number 转成 Uint32 类型。</li></ul> <h3 id="map"><a href="#map" class="header-anchor">#</a> map</h3> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token class-name">Array</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">map2</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">callback<span class="token punctuation">,</span> thisArg</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">TypeError</span><span class="token punctuation">(</span><span class="token string">'this is null or not defined'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> callback <span class="token operator">!==</span> <span class="token string">&quot;function&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">TypeError</span><span class="token punctuation">(</span>callback <span class="token operator">+</span> <span class="token string">' is not a function'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">const</span> <span class="token constant">O</span> <span class="token operator">=</span> <span class="token function">Object</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+    <span class="token keyword">const</span> len <span class="token operator">=</span> <span class="token constant">O</span><span class="token punctuation">.</span>length <span class="token operator">&gt;&gt;&gt;</span> <span class="token number">0</span>
+    <span class="token keyword">let</span> k <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> res <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>k <span class="token operator">&lt;</span> len<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>k <span class="token keyword">in</span> <span class="token constant">O</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           res<span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">callback</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>thisArg<span class="token punctuation">,</span> <span class="token constant">O</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">,</span> k<span class="token punctuation">,</span> <span class="token constant">O</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        k<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+   <span class="token keyword">return</span> res
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="filter"><a href="#filter" class="header-anchor">#</a> filter</h3> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token class-name">Array</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">filter2</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">callback<span class="token punctuation">,</span> thisArg</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">TypeError</span><span class="token punctuation">(</span><span class="token string">'this is null or not defined'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> callback <span class="token operator">!==</span> <span class="token string">&quot;function&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">TypeError</span><span class="token punctuation">(</span>callback <span class="token operator">+</span> <span class="token string">' is not a function'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">const</span> <span class="token constant">O</span> <span class="token operator">=</span> <span class="token function">Object</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+    <span class="token keyword">const</span> len <span class="token operator">=</span> <span class="token constant">O</span><span class="token punctuation">.</span>length <span class="token operator">&gt;&gt;&gt;</span> <span class="token number">0</span>
+    <span class="token keyword">let</span> k <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> res <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>k <span class="token operator">&lt;</span> len<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>k <span class="token keyword">in</span> <span class="token constant">O</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">callback</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>thisArg<span class="token punctuation">,</span> <span class="token constant">O</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">,</span> k<span class="token punctuation">,</span> <span class="token constant">O</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+               res<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token constant">O</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">)</span>                
+           <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        k<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+   <span class="token keyword">return</span> res
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="some"><a href="#some" class="header-anchor">#</a> some</h3> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token class-name">Array</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">some2</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">callback<span class="token punctuation">,</span> thisArg</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">TypeError</span><span class="token punctuation">(</span><span class="token string">'this is null or not defined'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> callback <span class="token operator">!==</span> <span class="token string">&quot;function&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">TypeError</span><span class="token punctuation">(</span>callback <span class="token operator">+</span> <span class="token string">' is not a function'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">const</span> <span class="token constant">O</span> <span class="token operator">=</span> <span class="token function">Object</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+    <span class="token keyword">const</span> len <span class="token operator">=</span> <span class="token constant">O</span><span class="token punctuation">.</span>length <span class="token operator">&gt;&gt;&gt;</span> <span class="token number">0</span>
+    <span class="token keyword">let</span> k <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>k <span class="token operator">&lt;</span> len<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>k <span class="token keyword">in</span> <span class="token constant">O</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">callback</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>thisArg<span class="token punctuation">,</span> <span class="token constant">O</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">,</span> k<span class="token punctuation">,</span> <span class="token constant">O</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> <span class="token boolean">true</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        k<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span>
+<span class="token punctuation">}</span>
+
+
+</code></pre></div><h3 id="reduce"><a href="#reduce" class="header-anchor">#</a> reduce</h3> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token class-name">Array</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">reduce2</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">callback<span class="token punctuation">,</span> initialValue</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">TypeError</span><span class="token punctuation">(</span><span class="token string">'this is null or not defined'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> callback <span class="token operator">!==</span> <span class="token string">&quot;function&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">TypeError</span><span class="token punctuation">(</span>callback <span class="token operator">+</span> <span class="token string">' is not a function'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">const</span> <span class="token constant">O</span> <span class="token operator">=</span> <span class="token function">Object</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+    <span class="token keyword">const</span> len <span class="token operator">=</span> <span class="token constant">O</span><span class="token punctuation">.</span>length <span class="token operator">&gt;&gt;&gt;</span> <span class="token number">0</span>
+    <span class="token keyword">let</span> k <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> acc
+    
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>arguments<span class="token punctuation">.</span>length <span class="token operator">&gt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        acc <span class="token operator">=</span> initialValue
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 没传入初始值的时候，取数组中第一个非 empty 的值为初始值</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>k <span class="token operator">&lt;</span> len <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token punctuation">(</span>k <span class="token keyword">in</span> <span class="token constant">O</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            k<span class="token operator">++</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>k <span class="token operator">&gt;</span> len<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">TypeError</span><span class="token punctuation">(</span> <span class="token string">'Reduce of empty array with no initial value'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        acc <span class="token operator">=</span> <span class="token constant">O</span><span class="token punctuation">[</span>k<span class="token operator">++</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>k <span class="token operator">&lt;</span> len<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>k <span class="token keyword">in</span> <span class="token constant">O</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            acc <span class="token operator">=</span> <span class="token function">callback</span><span class="token punctuation">(</span>acc<span class="token punctuation">,</span> <span class="token constant">O</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">,</span> k<span class="token punctuation">,</span> <span class="token constant">O</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        k<span class="token operator">++</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> acc
+<span class="token punctuation">}</span>
+
+
+
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/question/array/2.html" class="prev">
+        数组扁平化
+      </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.58d27036.js" defer></script><script src="/assets/js/2.99575ca8.js" defer></script><script src="/assets/js/17.97b95325.js" defer></script>
+  </body>
+</html>

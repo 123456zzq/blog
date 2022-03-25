@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>数组扁平化 | 大Q前端进阶</title>
+    <meta name="generator" content="VuePress 1.5.3">
+    <link rel="icon" href="/app.ico">
+    <meta name="description" content="成长之旅">
+    <link rel="preload" href="/assets/css/0.styles.550733f2.css" as="style"><link rel="preload" href="/assets/js/app.58d27036.js" as="script"><link rel="preload" href="/assets/js/2.99575ca8.js" as="script"><link rel="preload" href="/assets/js/16.362cf136.js" as="script"><link rel="prefetch" href="/assets/js/10.aa19c72d.js"><link rel="prefetch" href="/assets/js/11.09fe5e71.js"><link rel="prefetch" href="/assets/js/12.1050c9a3.js"><link rel="prefetch" href="/assets/js/13.77aaf57d.js"><link rel="prefetch" href="/assets/js/14.bcf39797.js"><link rel="prefetch" href="/assets/js/15.1969ae57.js"><link rel="prefetch" href="/assets/js/17.97b95325.js"><link rel="prefetch" href="/assets/js/18.b8d41aeb.js"><link rel="prefetch" href="/assets/js/19.dedad791.js"><link rel="prefetch" href="/assets/js/20.7c79639a.js"><link rel="prefetch" href="/assets/js/21.04d8a40d.js"><link rel="prefetch" href="/assets/js/22.a33d2d87.js"><link rel="prefetch" href="/assets/js/23.27fe6aea.js"><link rel="prefetch" href="/assets/js/3.298308c1.js"><link rel="prefetch" href="/assets/js/4.5c6ad674.js"><link rel="prefetch" href="/assets/js/5.d9720409.js"><link rel="prefetch" href="/assets/js/6.23631876.js"><link rel="prefetch" href="/assets/js/7.9edc3237.js"><link rel="prefetch" href="/assets/js/8.b6d73c19.js"><link rel="prefetch" href="/assets/js/9.2b63de7f.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.550733f2.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">大Q前端进阶</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/question/" class="nav-link router-link-active">
+  每日一题
+</a></div><div class="nav-item"><a href="/js/" class="nav-link">
+  Js
+</a></div><div class="nav-item"><a href="/vue/" class="nav-link">
+  Vue
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/question/" class="nav-link router-link-active">
+  每日一题
+</a></div><div class="nav-item"><a href="/js/" class="nav-link">
+  Js
+</a></div><div class="nav-item"><a href="/vue/" class="nav-link">
+  Vue
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span></span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/question/" aria-current="page" class="sidebar-link">目录</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Array</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/question/array/1.html" class="sidebar-link">数组去重</a></li><li><a href="/question/array/2.html" aria-current="page" class="active sidebar-link">数组扁平化</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/question/array/3.html" class="sidebar-link">数组原型方法</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="数组扁平化"><a href="#数组扁平化" class="header-anchor">#</a> 数组扁平化</h3> <h4 id="es10-flat"><a href="#es10-flat" class="header-anchor">#</a> ES10 flat</h4> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span><span class="token function">flat</span><span class="token punctuation">(</span><span class="token number">Infinity</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// [1,2,3,4,5,6]</span>
+</code></pre></div><h3 id="递归"><a href="#递归" class="header-anchor">#</a> 递归</h3> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">]</span>
+<span class="token keyword">function</span> <span class="token function">flatter</span><span class="token punctuation">(</span><span class="token parameter">arr</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> arr<span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">c<span class="token punctuation">,</span>n</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span>
+        Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">[</span><span class="token operator">...</span>c<span class="token punctuation">,</span><span class="token operator">...</span><span class="token function">flatter</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token operator">...</span>c<span class="token punctuation">,</span>n<span class="token punctuation">]</span>
+    <span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">flatter</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// [1,2,3,4,5,6]</span>
+</code></pre></div><div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">let</span> arr1 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> <span class="token function-variable function">flatter</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">ary</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> newAry <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    ary<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">v</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            newAry<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token function">flatter</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> newAry
+        <span class="token punctuation">}</span> 
+        newAry<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> newAry<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">flatter</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/question/array/1.html" class="prev">
+        数组去重
+      </a></span> <span class="next"><a href="/question/array/3.html">
+        数组原型方法
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.58d27036.js" defer></script><script src="/assets/js/2.99575ca8.js" defer></script><script src="/assets/js/16.362cf136.js" defer></script>
+  </body>
+</html>
